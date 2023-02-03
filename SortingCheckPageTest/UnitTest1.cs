@@ -1,18 +1,23 @@
 using NUnit.Framework;
+using OpenQA.Selenium;
+using System.Threading;
+using OpenQA.Selenium.Interactions;
+using System;
 
 namespace SortingCheckPageTest
 {
-    public class Tests
-    {
-        [SetUp]
-        public void Setup()
-        {
-        }
+    [TestFixture]
 
+    public class Tests : BaseClass
+    {
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+
+            mainMenu.ClickElement();
+            mainMenu.GetListsNewsTime();
+
         }
     }
 }

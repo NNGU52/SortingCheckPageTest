@@ -11,12 +11,12 @@ using OpenQA.Selenium.Interactions;
 
 namespace SortingCheckPageTest
 {
-    class BaseClass
+    public class BaseClass
     {
-        public static IWebDriver driver;
+        protected static IWebDriver driver;
 
         [OneTimeSetUp]
-        public void DoBeforeAllTheTests()
+        protected void DoBeforeAllTheTests()
         {
             driver = new OpenQA.Selenium.Chrome.ChromeDriver();
         }
@@ -31,7 +31,7 @@ namespace SortingCheckPageTest
         [TearDown]
         protected void DoAfterEach()
         {
-            driver.Quit();
+            //driver.Quit();
         }
     }
 }

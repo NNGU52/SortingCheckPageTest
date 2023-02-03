@@ -8,5 +8,6 @@ namespace SortingCheckPageTest
 {
     class TestSettings
     {
+        public static string HostPrefix = "https://www.cian.ru/";
     }
 }
