@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using System.Threading;
 using OpenQA.Selenium.Interactions;
 using System;
+using System.Linq;
 
 namespace SortingCheckPageTest
 {
@@ -16,8 +17,9 @@ namespace SortingCheckPageTest
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
 
             mainMenu.ClickElement();
-            mainMenu.GetListsNewsTime();
-
+            var actualSortDate = mainMenu.GetListsNewsDates().ToList();
+            var expectedSortDate = actualSortDate.OrderByDescending(x => x);
+            Assert.IsFalse(expectedSortDate.SequenceEqual(actualSortDate), "The sort date is wrong");
         }
     }
 }

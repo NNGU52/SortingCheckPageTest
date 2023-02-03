@@ -15,7 +15,7 @@ namespace SortingCheckPageTest
     {
         IWebDriver driver;
 
-        private readonly By _allTheTimeNews = By.XPath("//span[@itemprop='datePublished']");
+        private readonly By _allTheDateNews = By.XPath("//span[@itemprop='datePublished']");
         private readonly By _rentButton = By.XPath("//a[@class='_25d45facb5--link--rqF9a']");
         private readonly By _magazineButton = By.XPath("//span[@data-testid='dropdown_link_icon']");
 
@@ -45,17 +45,14 @@ namespace SortingCheckPageTest
             WaitElement(_magazineButton);
             var magazineBy = driver.FindElement(_magazineButton);
             magazineBy.Click();
-            //Thread.Sleep(1000);
         }
 
-        public void GetListsNewsTime()
+        public IEnumerable<DateTime> GetListsNewsDates()
         {
-            //return driver
-            //.FindElement(_allTheTimeNews).First(x => DateTime.Parse(x.Text));
-            //var cells = driver.FindElements(_allTheTimeNews);
-            //Assert.IsTrue(cells.OrderBy(c => c.Text).SequenceEqual(cells));
-            IList<IWebElement> tableColumnData = driver.FindElements(_allTheTimeNews);
-            tableColumnData.OrderBy(t => DateTime.Parse(t.Text)).ToList();
+            var tableColumnData_ = driver.FindElements(_allTheDateNews);
+            IEnumerable<DateTime> f = tableColumnData_.Select(x => DateTime.Parse(x.Text));
+
+            return f;
         }
     }
 }
