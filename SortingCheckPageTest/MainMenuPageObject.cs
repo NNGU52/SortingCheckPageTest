@@ -17,11 +17,24 @@ namespace SortingCheckPageTest
 
         private readonly By _allTheTimeNews = By.XPath("//span[@itemprop='datePublished']");
         private readonly By _rentButton = By.XPath("//a[@class='_25d45facb5--link--rqF9a']");
-        private readonly By _magazineButton = By.XPath("//a[@href='https://orekhovo-zuyevo.cian.ru/magazine/']");
+        private readonly By _magazineButton = By.XPath("//span[@data-testid='dropdown_link_icon']");
 
         public MainMenuPageObject(IWebDriver webDriver)
         {
             driver = webDriver;
+        }
+
+        // явное ожидание 
+        public void WaitElement(By locator)
+        {
+            try
+            {
+                new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                throw new NotFoundException($"Cannot find out that app in specific location: {locator}", ex);
+            }
         }
 
         public void ClickElement()
@@ -29,9 +42,9 @@ namespace SortingCheckPageTest
             var rentBy = driver.FindElement(_rentButton);
             Actions builder = new Actions(driver);
             builder.MoveToElement(rentBy).Perform();
-            Thread.Sleep(1000);
-            //var magazineBy = driver.FindElement(_magazineButton);
-            //magazineBy.Click();
+            WaitElement(_magazineButton);
+            var magazineBy = driver.FindElement(_magazineButton);
+            magazineBy.Click();
             //Thread.Sleep(1000);
         }
 
