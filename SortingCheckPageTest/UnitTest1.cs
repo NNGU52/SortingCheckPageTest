@@ -15,11 +15,11 @@ namespace SortingCheckPageTest
         public void Test1()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
-
+            MagazinePageObject magazine = new MagazinePageObject(driver);
             mainMenu.ClickElement();
-            var actualSortDate = mainMenu.GetListsNewsDates().ToList();
+            var actualSortDate = magazine.GetListsNewsDates().ToList();
             var expectedSortDate = actualSortDate.OrderByDescending(x => x);
-            Assert.IsFalse(expectedSortDate.SequenceEqual(actualSortDate), "The sort date is wrong");
+            Assert.IsTrue(expectedSortDate.SequenceEqual(actualSortDate), "The sort date is wrong");
         }
     }
 }

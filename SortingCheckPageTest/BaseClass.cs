@@ -31,7 +31,7 @@ namespace SortingCheckPageTest
         [TearDown]
         protected void DoAfterEach()
         {
-            //driver.Quit();
+            driver.Quit();
         }
     }
 }
